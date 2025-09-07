@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="inline-container">
+  <div class="form-wrapper">
+    <div class="info-card">
+      <div class="form-header">
+        <h2>Notices</h2>
+      </div>
+      <div class="notices">
+        {% if current_user.notices %}
+        <ul>
+          {% for notice in current_user.notices|sort(attribute='created_at', reverse=True) %}
+          <li>
+            [<strong>{{ notice.created_at.strftime('%Y-%m-%d %H:%M') }}</strong>]
+            {{ notice.message }}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No notices yet.</p>
+        {% endif %}
+      </div>
+      
+    </div>
+  </div>
+  <div class="form-wrapper">
+    <div class="info-card">
+      <div class="form-header">
+        <h2>Scan-ins</h2>
+      </div>
+      <br>
+      <div class="table" id="scanin-table">
+        <div class="form-body">
+          {% if current_user.scanins %}
+          <table class="table-content">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Trash Type</th>
+                <th>Used On</th>
+                <th>Trash Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for s in current_user.scanins|sort(attribute='date', reverse=True) %}
+              <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ s.type.name }}</td>
+                <td>{{ s.timestamp.strftime('%d %b, %Y - %I:%M %p') }}</td>
+                <td>{{ s.weight }} kg</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <p>No usage recorded yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

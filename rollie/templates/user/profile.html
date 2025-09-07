@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="inline-container">
+  <div class="form-wrapper">
+    <div class="info-card">
+      <div class="form-header">
+        <h2>Profile</h2>
+      </div>
+      <div class="form-body">
+        <div class="form-field-row">
+          <label for="name">Name</label>
+          <input type="text" readonly id="name" value="{{ current_user.name }}">
+        </div>
+        <div class="form-field-row">
+          <label for="email">Email</label>
+          <input type="email" readonly id="email" value="{{ current_user.email }}">
+        </div>
+        <div class="form-field-row">
+          <label for="community">Community</label>
+          <input type="text" readonly id="community" value="{{ current_user.community.name }}">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-wrapper">
+    <div class="info-card" id="pf">
+      <div class="form-header">
+        <h2>Key Card</h2>
+      </div>
+      <div class="form-field-row">
+        <label>Key Card QR Code</label>
+        <p>Scan this at the bin. You can save it to your phone or print it for convenience</p>
+      </div>
+      <div class="sub-card">
+        <div class="card-content">
+          <img class="qr-img" src="{{ url_for('serve_qr') }}" alt="Key Card QR Code">
+          <button class="btn-submit" onclick="window.open(`{{ url_for('print_card') }}`)">Print Card</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}Rollie NoWaste | {{ title }}{% endblock %}
+
+{% block content %}
+
+<div class="inline-container">
+  <div class="form-wrapper">
+    <div class="info-card">
+      <div class="form-header">
+        <h2>Profile</h2>
+      </div>
+      <div class="form-body">
+        <div class="form-field-row">
+          <label for="name">Name</label>
+          <input type="text" readonly id="name" value="{{ current_user.name }}">
+        </div>
+        <div class="form-field-row">
+          <label for="email">Email</label>
+          <input type="email" readonly id="email" value="{{ current_user.email }}">
+        </div>
+        <div class="form-field-row">
+          <label for="community">Plant</label>
+          <input type="text" readonly id="community" value="{{ current_user.plant.name }}">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-wrapper">
+    <div class="info-card" id="pf">
+      <div class="form-header">
+        <h2>Communities Covered</h2>
+      </div>
+      <br>
+      <div class="table" id="scanin-table">
+        <div class="form-body">
+          {% if current_user.plant.communities %}
+          <table class="table-content">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Community Name</th>
+                <th>Population</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for c in current_user.plant.communities %}
+              <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ c.name }}</td>
+                <td>{{ c.get_population() }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <p>No communities recorded yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

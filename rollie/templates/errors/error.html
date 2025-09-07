@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="form-wrapper">
+  <div class="info-card">
+    <h2>Error {{ error_code }}</h2>
+    <p>{{ message }}</p>
+    <br>
+    <a id="error-return" href="{{ url_for('index') }}">Return</a>
+  </div>
+</div>
+
+{% endblock %}

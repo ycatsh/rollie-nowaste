@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}Rollie NoWaste | {{ title }}{% endblock %}
+
+{% block content %}
+
+<div class="form-wrapper">
+  <div class="info-card">
+    <div class="form-header">
+      <h2>Scan Key Card</h2>
+    </div>
+    
+    <div class="scanner">
+      <div id="reader"></div>
+      <div id="result">Waiting for scan...</div>
+    </div>
+    
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/scan.js') }}"></script>
+  </div>
+</div>
+
+{% endblock %}

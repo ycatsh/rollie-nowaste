@@ -1,0 +1,403 @@
+/* ----------------------------------
+Variables (Apple-Inspired)
+---------------------------------- */
+:root {
+    /* Base */
+    --color-bg: #4ca1cc;
+    --color-surface: #ffffff;
+    --color-surface-alt: #f2f2f2;
+    --color-card: #ffffff;
+    --color-border: #e0e0e0;
+
+    /* Text */
+    --color-text: #1c1c1e;
+    --color-text-light: #ffffff;
+    --color-text-dark: #1c1c1e;
+    --color-muted: #8e8e93;
+
+    /* Accent */
+    --color-accent: #4ca1cc;
+    --color-accent-hover: #005ecb;
+
+    /* Feedback */
+    --color-success: #34c759;
+    --color-danger: #ff3b30;
+    --color-warning: #ff9500;
+    --color-info: #2196f3;
+
+    /* Font sizes */
+    --font-small: 14px;
+    --font-base: 18px;
+    --font-large: 18px;
+}
+
+/* ----------------------------------
+Global Reset & Base
+---------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: var(--font-base);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1.5;
+}
+
+/* Links */
+a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+a:hover {
+    color: var(--color-text-dark);
+}
+
+/* Inputs */
+input, textarea, select, button {
+    font-family: inherit;
+    font-size: inherit;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+}
+
+input:focus, textarea:focus, select:focus {
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+    border: 1px solid var(--color-accent);
+}
+
+/* ----------------------------------
+Navigation
+---------------------------------- */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 5rem;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-link-left li,
+.nav-link-right li {
+    display: inline-block;
+    margin: 0 0.5rem;
+    font-weight: 500;
+    font-size: var(--font-base);
+}
+
+.nav-link-left li a,
+.nav-link-right li a {
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+}
+
+.nav-link-left li a:hover,
+.nav-link-right li a:hover {
+    background-color: rgba(0, 122, 255, 0.1);
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.mobile-menu {
+    display: none;
+    background-color: var(--color-bg);
+    padding: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+.mobile-menu ul li {
+    margin: 0.5rem 0;
+}
+
+/* Mobile only */
+@media (max-width: 1000px) {
+    .desktop-only { display: none; }
+    .hamburger { display: block; }
+    .mobile-menu.show { display: block; }
+}
+
+/* ----------------------------------
+Layout Containers
+---------------------------------- */
+.form-wrapper,
+.membership-container,
+.table-container,
+.search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+}
+
+.inline-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+.inline-container .form-wrapper {
+    flex: 1 1 350px;
+    max-width: 700px;
+}
+
+/* ----------------------------------
+Cards
+---------------------------------- */
+.form-card,
+.info-card {
+    background: var(--color-card);
+    border-radius: 20px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s ease;
+}
+
+.form-card:hover,
+.info-card:hover {
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+}
+
+.form-header h2 {
+    font-size: var(--font-large);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* ----------------------------------
+Form Fields & Inputs
+---------------------------------- */
+.form-field,
+.form-field-row {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.form-label,
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--color-text-dark);
+}
+
+input,
+textarea,
+select,
+.form-input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    font-size: var(--font-base);
+    color: var(--color-text-dark);
+}
+
+input.invalid,
+.form-input.invalid { border-color: var(--color-danger); }
+
+.form-error {
+    font-size: var(--font-small);
+    color: var(--color-danger);
+    margin-top: 0.25rem;
+}
+
+.show-password-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: var(--font-base);
+    color: var(--color-text-dark);
+}
+
+.show-password-container label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.show-password-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.show-password-container label {
+    cursor: pointer;
+    user-select: none;
+}
+
+
+/* ----------------------------------
+Buttons
+---------------------------------- */
+button,
+.btn-submit {
+    display: block;
+    margin: 0 auto;  
+    padding: 0.65rem 1.25rem;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: var(--font-base);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--color-text-light);
+}
+
+.btn-submit {
+    background-color: var(--color-accent);
+    color: var(--color-text-light);
+    border: none;
+}
+
+.btn-flag {
+    background-color: var(--color-danger);
+    color: var(--color-text-light);
+    border: none;
+}
+
+.btn-unflag {
+    background-color: var(--color-success);
+    color: var(--color-text-light);
+    border: none;
+}
+
+.btn-submit:hover { 
+    background-color: var(--color-accent-hover); 
+}
+
+
+/* ----------------------------------
+Tables
+---------------------------------- */
+.table { width: 100%; overflow-x: auto; }
+
+.table-content {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+}
+
+.table-content th,
+.table-content td {
+    padding: 0.85rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: middle;
+}
+
+.table-content thead {
+    background-color: var(--color-surface-alt);
+    color: var(--color-text-dark);
+    font-weight: 600;
+}
+
+.table-content tbody tr:hover {
+    background-color: rgba(0,0,0,0.03);
+}
+
+.table-content td span,
+.table-content td form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.4rem;
+}
+
+.table-content td form {
+    justify-content: center;
+}
+
+
+/* ----------------------------------
+Alerts
+---------------------------------- */
+.alert {
+    border-radius: 16px;
+    padding: 0.9rem 1.2rem;
+    font-weight: 600;
+    width: 90%;
+    max-width: 700px;
+    margin: 0.5rem auto;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.alert.success { background-color: var(--color-success); color: var(--color-text-light); }
+.alert.danger { background-color: var(--color-danger); color: var(--color-text-light); }
+.alert.warning { background-color: var(--color-warning); color: var(--color-text-light); }
+.alert.info { background-color: var(--color-info); color: var(--color-text-light); }
+
+/* ----------------------------------
+Misc
+---------------------------------- */
+.inline-container .info-card { 
+    flex: 1 1 300px; 
+}
+
+.qr-img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+}
+
+.scanner {
+    padding: 0 5rem;
+    width: 100%;
+}
+
+#reader {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+#result {
+    border-radius: 14px;
+    padding: 0.8rem 1.2rem;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+#result.success { 
+    background-color: var(--color-success); 
+    color: var(--color-text-light); 
+}
+
+#result.fail { 
+    background-color: var(--color-danger); 
+    color: var(--color-text-light); 
+}
+
+

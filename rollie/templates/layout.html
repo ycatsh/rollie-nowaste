@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">    
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='js/hamburger.js') }}"></script>
+  <title>{% block title %}Rollie NoWaste{% endblock %}</title>
+</head> 
+
+<body>
+  <header>
+    <nav class="nav-container">
+      <ul class="nav-link-left">
+        <li><a href="{{ url_for('index') }}">Rollie NoWaste</a></li>
+      </ul>
+      <ul class="nav-link-right desktop-only">
+        {% if current_user.is_authenticated %}
+        {% if current_user.role ==  UserRole.SCANNER %}
+        <li><a href="{{ url_for('scan') }}">Scan Key Card</a></li>
+        <li><a href="{{ url_for('classifier') }}">Scan Item</a></li>
+        <li><a href="{{ url_for('signout') }}">Sign out</a></li>
+        {% else %}
+        {% if current_user.role ==  UserRole.PLANT_OPERATOR %}
+        <li><a href="{{ url_for('operator_dashboard') }}">Operator Dashboard</a></li>
+        <li><a href="{{ url_for('operator_profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('signout') }}">Sign out</a></li>
+        {% else %}
+        <li><a href="{{ url_for('user_dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('user_profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('signout') }}">Sign out</a></li>
+        {% endif %}
+        {% endif %}
+        {% else %}
+        <li><a href="{{ url_for('signin') }}">Sign in</a></li>
+        <li><a href="{{ url_for('signup') }}">Sign up</a></li>
+        {% endif %}
+      </ul>
+      <div class="hamburger">&#9776;</div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        {% if current_user.is_authenticated %}
+        {% if current_user.role ==  UserRole.PLANT_OPERATOR %}
+        <li><a href="{{ url_for('operator_dashboard') }}">Operator Dashboard</a></li>
+        <li><a href="{{ url_for('operator_profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('signout') }}">Sign out</a></li>
+        {% else %}
+        <li><a href="{{ url_for('user_dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('user_profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('signout') }}">Sign out</a></li>
+        {% endif %}
+        {% else %}
+        <li><a href="{{ url_for('signin') }}">Sign in</a></li>
+        <li><a href="{{ url_for('signup') }}">Sign up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </header>
+  <div class="top">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert {{ category }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </div>
+  <main role="main" class="main-container">
+    <div class="bottom">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+</body>
+</html>
