@@ -24,3 +24,4 @@ Implementation: This system was integrated into a web application. Each plant ca
 ### ERD Diagram for the database models
 
 ![graphic](./.github/erd.png)
+*note: the Plant class has a one-to-many relatonship with Community and User (directly) as well because the User object has roles defined by an enum. If a User object is given the `UserRole.PLANT_OPERATOR` role then this object is directly associated with the plant, otherwise a non-operator user is associated to its community.*
